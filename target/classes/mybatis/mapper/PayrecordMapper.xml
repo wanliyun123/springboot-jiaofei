@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myapplication.jiaofei.dao.PayrecordMapper" >
+  <resultMap id="BaseResultMap" type="com.myapplication.jiaofei.pojo.Payrecord" >
+    <id column="pay_id" property="payId" jdbcType="INTEGER" />
+    <result column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="details" property="details" jdbcType="VARCHAR" />
+    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="pay_money" property="payMoney" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, type_id, details, pay_time, pay_id, pay_money
+  </sql>
+<!--  <resultMap id="recordMap" type="com.myapplication.jiaofei.pojo.Payrecord">-->
+<!--    <id property="pay_id" column="payId"/>-->
+
+<!--    <result column="user_id" property="user_id"/>-->
+<!--    <result column="pay_money" property="pay_money"/>-->
+<!--    <result column="pay_time" property="pay_time"/>-->
+<!--    <result column="type_id" property="dId"/>-->
+<!--    <result column="details" property="details"></result>-->
+<!--  </resultMap>-->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
+    select * from payrecord
+<!--    <include refid="Base_Column_List" />-->
+
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from payrecord
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.myapplication.jiaofei.pojo.Payrecord" >
+    insert into payrecord (user_id, type_id, details, 
+      pay_time, pay_id, pay_money
+      )
+    values (#{userId,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{details,jdbcType=VARCHAR}, 
+      #{payTime,jdbcType=TIMESTAMP}, #{payId,jdbcType=INTEGER}, #{payMoney,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myapplication.jiaofei.pojo.Payrecord" >
+    insert into payrecord
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="details != null" >
+        details,
+      </if>
+      <if test="payTime != null" >
+        pay_time,
+      </if>
+      <if test="payId != null" >
+        pay_id,
+      </if>
+      <if test="payMoney != null" >
+        pay_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="details != null" >
+        #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payId != null" >
+        #{payId,jdbcType=INTEGER},
+      </if>
+      <if test="payMoney != null" >
+        #{payMoney,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myapplication.jiaofei.pojo.Payrecord" >
+    update payrecord
+    <set >
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="details != null" >
+        details = #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null" >
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payId != null" >
+        pay_id = #{payId,jdbcType=INTEGER},
+      </if>
+      <if test="payMoney != null" >
+        pay_money = #{payMoney,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myapplication.jiaofei.pojo.Payrecord" >
+    update payrecord
+    set type_id = #{typeId,jdbcType=INTEGER},
+      details = #{details,jdbcType=VARCHAR},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      pay_id = #{payId,jdbcType=INTEGER},
+      pay_money = #{payMoney,jdbcType=DOUBLE}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>
