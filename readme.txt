@@ -1,6 +1,7 @@
 
 
 该系统目前是一个银行在线缴费系统的雏形，相关介绍如下：
+    环境：mysql5.6 ；springboot2.4；session进行用户拦截；mybatis-generator生成sql语句
     数据库设计：目前设计的是三个系统，分别是useraccount，userpwd以及payrecord三张表，分别是
 用户个人信息表：用于存储用户个人信息；
 用户密码表：用于存储用户id和密码（注意这里的id是和useraccount中的userid相关联的外键）；
